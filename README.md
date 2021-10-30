@@ -61,20 +61,24 @@ Pertama, tambahkan node dan hubungkan masing-masing node hingga sesuai dengan ga
   
    ![2 - konf super di kaizoku](https://user-images.githubusercontent.com/55240758/139537898-9ca23739-e9ed-4079-8915-fa431853bc7b.jpg)
 
-   Lalu ```ping www.super.franky.a06.com``` pada node loguetown 
+- **Langkah kedua** : Lakukan pengecekan dengan ```ping www.super.franky.a06.com``` pada node loguetown 
      
    ![2 - ping super alabasta](https://user-images.githubusercontent.com/55240758/139537901-26919d84-9aff-42c9-9861-8c5e3e759c22.jpg)
 
 ### Soal 4
  **Buat juga reverse domain untuk domain utama**
 ### Jawaban 4
-![3 - konf di kaizoku](https://user-images.githubusercontent.com/55240758/139537984-62aca77a-87a7-45fc-b881-aaf949cb3d15.jpg)
+- **Langkah pertama** :Edit file ```nano /etc/bind/named.conf.local``` dan tambahkan konfig seperti gambar berikut :    
 
-tambahkan zone 2.2.10.in-addr.arpa dengan type master dan file /etc/bind/kaizoku/2.2.10.in-addr.arpa pada file /etc/bind/named.conf.local di node EniesLobby.
-![3 - konf di bind named local](https://user-images.githubusercontent.com/55240758/139537990-86f0c592-b9a5-4847-bdaf-57072b873180.jpg)
+    ![3 - konf di kaizoku](https://user-images.githubusercontent.com/55240758/139537984-62aca77a-87a7-45fc-b881-aaf949cb3d15.jpg)
 
-Kemudian lakukan pengecekkan dengan command host -t PTR 10.2.2.2 yang akan mengarah ke franky.a06.com
-![3 - host logue](https://user-images.githubusercontent.com/55240758/139537997-4ac0738e-1248-47dc-9083-3c1392665cd7.jpg)
+- **Langkah kedua** : Tambahkan zone 2.2.10.in-addr.arpa dengan type master dan file ```/etc/bind/kaizoku/2.2.10.in-addr.arpa``` pada ```file /etc/bind/named.conf.local``` di node EniesLobby.
+       
+    ![3 - konf di bind named local](https://user-images.githubusercontent.com/55240758/139537990-86f0c592-b9a5-4847-bdaf-57072b873180.jpg)
+
+- **Langkah ketiga** : Kemudian lakukan pengecekkan dengan command ```host -t PTR 10.2.2.2``` yang akan mengarah ke **franky.a06.com**
+      
+    ![3 - host logue](https://user-images.githubusercontent.com/55240758/139537997-4ac0738e-1248-47dc-9083-3c1392665cd7.jpg)
 
 ### Soal 5
 **Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Water7 sebagai DNS Slave untuk domain utama**
