@@ -158,7 +158,7 @@ Buka lynx super.franky.a06.com/public, maka akan muncul directory listing.
 buka file /etc/apache2/sites-available/super.franky.a06.com.conf dan ubah ErrorDocument menjadi 404 /error/404.html
 ![12 - konf](https://user-images.githubusercontent.com/55240758/139538236-f19c80f5-667a-4ef1-995f-96f7d313c068.jpg)
 
-Buka lynx super.franky.a06.com/aowkwkwkwk maka akan muncul sebagai berikut.
+Buka lynx super.franky.a06.com/lathifa maka akan muncul sebagai berikut.
 ![12 - lynx](https://user-images.githubusercontent.com/55240758/139538238-39c4913c-0ecb-4ea1-9f2d-fb02dc20e609.jpg)
 
 ### Soal 13
