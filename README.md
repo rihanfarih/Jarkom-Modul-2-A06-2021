@@ -5,40 +5,65 @@ Lapres Praktikum Jaringan Komputer 2021 - Modul 2
 - Lathifa Itqonina Mardiyati (05111940000176)
 
 
-
-
-
 ## Soal  dan Jawaban
 ### Soal 1
 Luffy adalah seorang yang akan jadi Raja Bajak Laut. Demi membuat Luffy menjadi Raja Bajak Laut, Nami ingin membuat sebuah peta, bantu Nami untuk membuat peta berikut :
 
 ![image9](https://user-images.githubusercontent.com/61973814/139194256-c0640fcf-d5ad-448f-a38d-905adf9a82dd.png)
 
-EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet
+EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet.
+
 ### Jawaban 1
-Pertama, tambahkan node dan hubungkan masing-masing node hingga sesuai dengan gambar dan ganti hostname dari masing-masing node. Lalu setting network masing-masing node dengan fitur Edit network configuration. Kemudian jalankan perintah iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.204.0.0/16 pada router Foosha. Lalu ketikkan command echo nameserver 192.168.122.1 > /etc/resolv.conf pada masing-masing node ubuntu. Lalu lakukan pengecekkan dengan melakukan ping ke google.
+Pertama, tambahkan node dan hubungkan masing-masing node hingga sesuai dengan gambar dan ganti hostname dari masing-masing node. Lalu setting network masing-masing node dengan fitur Edit network configuration. Kemudian jalankan perintah ``iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.204.0.0/16`` pada router Foosha. Lalu ketikkan command ``echo nameserver 192.168.122.1 > /etc/resolv.conf`` pada masing-masing node ubuntu. Lalu lakukan pengecekkan dengan melakukan ping ke google pada setiap node untuk mengetahui apakah sudah terhubung dengan internet. Salah satunya sebagai berikut :  
+
+![image](https://user-images.githubusercontent.com/55240758/139542298-d05c1cee-9fb7-4ee6-9b2f-3fd84d3b0bf3.png)
+
 
 ### Soal 2
 **Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Kalian diminta Luffy untuk membuat website utama dengan mengakses franky.yyy.com dengan alias www.franky.yyy.com pada folder kaizoku**
 ### Jawaban 2
-Pertama, buat file franky.a06.com pada folder /etc/bind/kaizoku di EniesLobby. Lalu atur nama domain dan IP yang menuju ke EniesLobby (10.2.2.2). 
-![1 - konf franky di kaizoku](https://user-images.githubusercontent.com/55240758/139537827-7e66c1aa-8a1e-4d98-ae76-d161b89295ef.jpg)
+- **Langkah satu** : Melakukan penginstallan konfigurasi yang diperlukan 
+    ``` 
+      apt-get update
+      apt-get install bind9
+    ```
+- **Langkah kedua** : Setelah melakukan penginstalan, kemudian pada file ```/etc/bind/named.conf.local``` di EniesLobby, buat zone **franky.a06.com** dengan type master dan file     ```/etc/bind/kaizoku/franky.a06.com```.  
+   
+    ![1 - konf di bind named local](https://user-images.githubusercontent.com/55240758/139537797-e978c7e3-3eb3-4015-9a9c-1c143b10924e.jpg)
+
+- **Langkah ketiga** : Buat folder kaizoku di /etc/bind Lalu copykan file db.local pada path /etc/bind ke dalam folder kaizoku yang baru saja dibuat dan ubah namanya menjadi franky.a06.com
+    ```
+     cp /etc/bind/db.local /etc/bind/kaizoku/franky.a06.com
+    ```
+  
+- **Langkah keempat** : Edit file **franky.a06.com** pada folder ```/etc/bind/kaizoku``` pada node EniesLobby dengan mengatur nama domain dan IP yang menuju ke EniesLobby (10.2.2.2). menjadi sebagai berikut :  
+  
+    ![1 - konf franky di kaizoku](https://user-images.githubusercontent.com/55240758/139537827-7e66c1aa-8a1e-4d98-ae76-d161b89295ef.jpg)
+
+- **Langkah kelima** : lakukan restart bind pada node eniesLobby
+    ```
+    service bind9 restart
+    ```
+- **Langkah keenam** : menambahkan server eniesLobby (10.2.2.2) pada **/etc/resolv.conf** pada node client yaitu loguetown & alabasta 
+    ```
+    nameserver 10.2.2.2
+    ```
+- **Langkah keenam** : Setelah itu ```ping www.franky.a06.com``` atau ```ping franky.a06.com``` pada node Loguetown dan akan menampilkan tampilan sebagai berikut.  
+  
+    ![1 - ping franky loguetown](https://user-images.githubusercontent.com/55240758/139537867-233548c2-8ab9-4e29-ad28-d8d7207a4526.jpg)  
 
 
-Kemudian  pada file /etc/bind/named.conf.local di EniesLobby, buat zone franky.a06.com dengan type master dan file /etc/bind/kaizoku/franky.a06.com. 
-![1 - konf di bind named local](https://user-images.githubusercontent.com/55240758/139537797-e978c7e3-3eb3-4015-9a9c-1c143b10924e.jpg)
-
-Setelah itu ping www.franky.a06.com  atau franky.a06.com pada node LogueTown dan akan menampilkan tampilan sebagai berikut.
-![1 - ping franky loguetown](https://user-images.githubusercontent.com/55240758/139537867-233548c2-8ab9-4e29-ad28-d8d7207a4526.jpg)  
 
 ### Soal 3
 **Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie**
 ### Jawaban 3
-atur nama subdomain, CNAME dan IP yang menuju ke Skypie (10.2.2.4) pada file franky.a06.com di folder /etc/bind/kaizoku pada node EniesLobby
-![2 - konf super di kaizoku](https://user-images.githubusercontent.com/55240758/139537898-9ca23739-e9ed-4079-8915-fa431853bc7b.jpg)
+- **Langkah pertama** : mengatur nama subdomain, CNAME dan IP yang menuju ke Skypie (10.2.2.4) pada file **franky.a06.com** di folder ```/etc/bind/kaizoku``` pada node EniesLobby.
+  
+   ![2 - konf super di kaizoku](https://user-images.githubusercontent.com/55240758/139537898-9ca23739-e9ed-4079-8915-fa431853bc7b.jpg)
 
-Lalu ping www.super.franky.a06.com pada node LogueTown 
-![2 - ping super alabasta](https://user-images.githubusercontent.com/55240758/139537901-26919d84-9aff-42c9-9861-8c5e3e759c22.jpg)
+   Lalu ```ping www.super.franky.a06.com``` pada node loguetown 
+     
+   ![2 - ping super alabasta](https://user-images.githubusercontent.com/55240758/139537901-26919d84-9aff-42c9-9861-8c5e3e759c22.jpg)
 
 ### Soal 4
  **Buat juga reverse domain untuk domain utama**
