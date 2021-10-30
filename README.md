@@ -114,3 +114,4 @@ isi disini
 ## Kendala yang dialami
 - Tingkat kesulitan soal jauh meningkat dari sebelumnya
 - Kepadatan jadwal membuat koordinasi kelompok kurang baik
+- saat pengumpulan sempat mengalami error sehingga beberapa soal mengulang dari awal
