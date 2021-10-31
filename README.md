@@ -128,17 +128,17 @@ kemudian lakukan pengecekan dengan ```ping general.mecha.franky.a06.com```
 **Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.**
 ### Jawaban 8
 - **Langkah pertama** : Melakukan edit pada file ```/etc/apache2/sites-available/frangky.a06.com.conf``` pada node skypie dengan DocumentRoot /var/www/frangky.a06.com
-ServerName frangky.a06.com, ServerAlias www.frangky.B05.com. seperti gambar berikut :
+ServerName frangky.a06.com, ServerAlias www.frangky.a06.com. seperti gambar berikut :
   
     ![8 - konf franky skypie](https://user-images.githubusercontent.com/55240758/139562772-69e3fc00-6fec-4636-97df-bd66c78df80f.jpg)
    
-- **Langkah kedua**  : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/franky.zip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **franky** menjadi **franky.a06.com**.
+- **Langkah kedua**  : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift yaitu pada https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/franky.zip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **franky** menjadi **franky.a06.com**.
    
-- **Langkah ketiga** : Lakukan pengecekan dengan command  ```lynx 10.2.2.4``` dan ```lynx www.franky.a06.com``` pada node alabasta
-  
+- **Langkah ketiga** : Lakukan pengecekan dengan command  ```lynx franky.a06.com``` atau ```lynx www.franky.a06.com``` pada node alabasta
+    
     ![7-lynx franky alabasta](https://user-images.githubusercontent.com/55240758/139538207-9aec6f7d-8e29-44de-96f9-7af2332f91ba.jpg)
 
-    kemudian lakukan command ```lynx 10.2.2.4``` dan ```lynx www.franky.a06.com``` pada node loguetown. Keduanya akan mengarah ke IP yang sama sehingga menghasilkan webserver yang sama.
+    kemudian lakukan command ```lynx franky.a06.com`` atau ```lynx www.franky.a06.com``` pada node loguetown. Keduanya akan mengarah ke IP yang sama sehingga menghasilkan webserver yang sama.
       
     ![7 - lynx franky loguetown](https://user-images.githubusercontent.com/55240758/139538209-4af47e87-2ac8-488b-957f-f25d8ff2438e.jpg)
 
@@ -177,7 +177,7 @@ ServerName frangky.a06.com, ServerAlias www.frangky.B05.com. seperti gambar beri
     
     ![9 -  konf super skypie](https://user-images.githubusercontent.com/55240758/139538229-ba0dbbf7-e836-4476-b8ab-a013ed12efcb.jpg)
     
-- **Langkah kedua** : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/super.franky.zip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip super.franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **super.franky** menjadi **super.franky.a06.com**.
+- **Langkah kedua** : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift yaitu pada https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/super.franky.zip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip super.franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **super.franky** menjadi **super.franky.a06.com**.
     
 - **Langkah ketiga** :  lakukan pengecekan dengan command ```lynx super.franky.a06.com``` pada loguetown atau alabasta dan tampilan yang akan dibuka yaitu asset sebagai berikut.
 
@@ -230,7 +230,7 @@ ServerName frangky.a06.com, ServerAlias www.frangky.B05.com. seperti gambar beri
     
     ![13 - konf 15500](https://user-images.githubusercontent.com/55240758/139538246-6d800c28-5b56-4056-8cbe-8cdb2ef8da07.jpg)
     
-- **Langkah kedua** : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/general.mecha.franky.zip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip general.mecha.franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **general.mecha.franky** menjadi **general.mecha.a06.com**.
+- **Langkah kedua** : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift yaitu pada https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/general.mecha.franky.zip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip general.mecha.franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **general.mecha.franky** menjadi **general.mecha.a06.com**.
 
 - **Langkah ketiga** : Lakukan penambahan pada file /etc/apache2/ports.conf dengan Listen 15000 & 15500 sebagai berikut :
 
