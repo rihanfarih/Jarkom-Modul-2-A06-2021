@@ -68,7 +68,7 @@ Pertama, tambahkan node dan hubungkan masing-masing node hingga sesuai dengan ga
 ### Soal 4
  **Buat juga reverse domain untuk domain utama**
 ### Jawaban 4
-- **Langkah pertama** :Edit file ```nano /etc/bind/named.conf.local``` dan tambahkan konfig seperti gambar berikut :    
+- **Langkah pertama** : Edit file ```nano /etc/bind/named.conf.local``` dan tambahkan konfig seperti gambar berikut :    
 
     ![3 - konf di kaizoku](https://user-images.githubusercontent.com/55240758/139537984-62aca77a-87a7-45fc-b881-aaf949cb3d15.jpg)
 
@@ -83,69 +83,108 @@ Pertama, tambahkan node dan hubungkan masing-masing node hingga sesuai dengan ga
 ### Soal 5
 **Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Water7 sebagai DNS Slave untuk domain utama**
 ### Jawaban 5
-edit file /etc/bind/named.conf.local pada node EniesLobby dengan menambahkan notify yes, also-notify dan allow-transfer dengan IP Water7 seperti pada gambar berikut
-![4 - konf di bind named local water 7](https://user-images.githubusercontent.com/55240758/139538061-c5c21ba5-2bd5-4fb6-aefc-4edb51652fca.jpg)
+- **Langkah 1** : melakukan edit file ```/etc/bind/named.conf.local``` pada node eniesLobby dengan menambahkan notify yes, also-notify dan allow-transfer dengan IP Water7 seperti pada gambar berikut.
+   
+    ![4 - konf di bind named local](https://user-images.githubusercontent.com/55240758/139538065-733e0054-df73-4f0d-9bfe-dffcc30c7cc8.jpg)
 
-Lalu, edit file /etc/bind/named.conf.local pada node Water7 dengan menambahkan zone franky.a06.com dengan type slave, masters IP EniesLobby, dan file /etc/bind/kaizoku/franky.a06.com.
+- **Langkah 2** : Lalu, edit file ```/etc/bind/named.conf.local``` pada node Water7 dengan menambahkan zone franky.a06.com dengan type slave, masters IP eniesLobby, dan file ```/etc/bind/kaizoku/franky.a06.com```. Seperti gambar berikut :
+    
+    ![4 - konf di bind named local water 7](https://user-images.githubusercontent.com/55240758/139538061-c5c21ba5-2bd5-4fb6-aefc-4edb51652fca.jpg)
 
-
-![4 - konf di bind named local](https://user-images.githubusercontent.com/55240758/139538065-733e0054-df73-4f0d-9bfe-dffcc30c7cc8.jpg)
 
 ### Soal 6
 **Setelah itu terdapat subdomain mecha.franky.yyy.com dengan alias www.mecha.franky.yyy.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo**
 ### Jawaban 6
-ubah file /etc/bind/named.conf.options pada node EniesLobby dengan meng-comment dnssec-validation auto; dan menambahkan allow-query(any;};.
-![5 - konf di bind named options](https://user-images.githubusercontent.com/55240758/139538101-1f3d0489-12c1-4175-9dfb-b74a0dbf8e3c.jpg)
+- **Langkah kesatu** : Melakukan edit pada file ```/etc/bind/named.conf.options``` pada node eniesLobby dengan meng-comment dnssec-validation auto; dan menambahkan allow-query(any;};. seperti gambar berikut :
+  
+    ![5 - konf di bind named options](https://user-images.githubusercontent.com/55240758/139538101-1f3d0489-12c1-4175-9dfb-b74a0dbf8e3c.jpg)
 
-Lalu, ubah /etc/bind/kaizoku/franky.a06.com pada node EniesLobby menjadi domain utama yang IP yang menuju ke node Skypie, dan membuat domain mecha yang didelegasikan ke IP Water7
-![5 - konf di kaizoku franky enieslobby](https://user-images.githubusercontent.com/55240758/139538095-8b049487-56bf-4be6-994f-fa137fe353e7.jpg)
+- **Langkah kedua** : Lalu, ubah ```/etc/bind/kaizoku/franky.a06.com``` pada node eniesLobby menjadi domain utama yang IP yang menuju ke node Skypie, dan membuat domain mecha yang didelegasikan ke IP Water7. Seperti gambar berikut :
+   
+    ![5 - konf di kaizoku franky enieslobby](https://user-images.githubusercontent.com/55240758/139538095-8b049487-56bf-4be6-994f-fa137fe353e7.jpg)
 
-Kemudian, buat file /etc/bind/sunnygo/mecha.franky.a06.com pada node Water7 dan mengatur domainnya menuju mecha.franky.a06.com dengan IP Skypie  dengan CNAME www.
-![5 - konf di bind sunnygo mecha water7](https://user-images.githubusercontent.com/55240758/139538092-bcf38d64-189f-4e05-98ae-3958c3997912.jpg)
+- **Langkah ketiga** : Kemudian, buat file ```/etc/bind/sunnygo/mecha.franky.a06.com``` pada node Water7 dan mengatur domainnya menuju `mecha.franky.a06.com dengan IP Skypie  dengan CNAME www.
+   
+    ![5 - konf di bind sunnygo mecha water7](https://user-images.githubusercontent.com/55240758/139538092-bcf38d64-189f-4e05-98ae-3958c3997912.jpg)
 
 
-Lalu lakukan ping www.mecha.franky.a06.com pada node LogueTown dan akan menerima paket dari IP Skypie
-![5 - ping mecha logue](https://user-images.githubusercontent.com/55240758/139538106-8d694f46-061c-49e1-81c8-1b0ce92ce7e6.jpg)
+- **Langkah keempat** : Lalu lakukan ```ping www.mecha.franky.a06.com``` pada node loguetown dan akan menerima paket dari IP Skypie.
+   
+    ![5 - ping mecha logue](https://user-images.githubusercontent.com/55240758/139538106-8d694f46-061c-49e1-81c8-1b0ce92ce7e6.jpg)
 
 
 ### Soal 7
 **Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie**
 ### Jawaban 7
-pertama buka file /etc/bind/sunnygo/mecha.franky.a06.com pada Water7 dan buat subdomain general yang mengarah ke IP skypie dan alias www.general yang mengarah ke general.mecha.franky.a06.com.
+pertama buka file ```/etc/bind/sunnygo/mecha.franky.a06.com``` pada Water7 dan buat subdomain general yang mengarah ke IP skypie dan alias www.general yang mengarah ke general.mecha.franky.a06.com.
+
+![image](https://user-images.githubusercontent.com/55240758/139562641-819b557c-778a-47a5-936a-5927d88bad65.png)
+
+kemudian lakukan pengecekan dengan ```ping general.mecha.franky.a06.com```
+   
 ![6 - ping general mecha alabasta](https://user-images.githubusercontent.com/55240758/139538130-a1d64fb8-5ecf-4e7d-8ec6-6004718fd0e3.jpg)
 
 ### Soal 8
 **Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.**
 ### Jawaban 8
-lynx pada alabasta
-![7-lynx franky alabasta](https://user-images.githubusercontent.com/55240758/139538207-9aec6f7d-8e29-44de-96f9-7af2332f91ba.jpg)
+- **Langkah pertama** : Melakukan edit pada file ```/etc/apache2/sites-available/frangky.a06.com.conf``` pada node skypie dengan DocumentRoot /var/www/frangky.a06.com
+ServerName frangky.a06.com, ServerAlias www.frangky.B05.com. seperti gambar berikut :
+  
+    ![8 - konf franky skypie](https://user-images.githubusercontent.com/55240758/139562772-69e3fc00-6fec-4636-97df-bd66c78df80f.jpg)
+   
+- **Langkah kedua**  : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/franky.czip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **franky** menjadi **franky.a06.com**.
+   
+- **Langkah ketiga** : Lakukan pengecekan dengan command  ```lynx 10.2.2.4``` dan ```lynx www.franky.a06.com``` pada node alabasta
+  
+    ![7-lynx franky alabasta](https://user-images.githubusercontent.com/55240758/139538207-9aec6f7d-8e29-44de-96f9-7af2332f91ba.jpg)
 
-Buka lynx 10.2.2.4 dan lynx www.franky.a06.com pada Loguetown. Keduanya akan mengarah ke IP yang sama sehingga menghasilkan webserver yang sama.
-![7 - lynx franky loguetown](https://user-images.githubusercontent.com/55240758/139538209-4af47e87-2ac8-488b-957f-f25d8ff2438e.jpg)
+    kemudian lakukan command ```lynx 10.2.2.4``` dan ```lynx www.franky.a06.com``` pada node loguetown. Keduanya akan mengarah ke IP yang sama sehingga menghasilkan webserver yang sama.
+      
+    ![7 - lynx franky loguetown](https://user-images.githubusercontent.com/55240758/139538209-4af47e87-2ac8-488b-957f-f25d8ff2438e.jpg)
 
 
 ### Soal 9
 **Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home.**
 ### Jawaban 9
-Pertama Buka file /etc/apache2/sites-available/franky.a06.com.conf pada Skypie dan ganti Alias menjadi "\home".
-![8 - konf franky skypie](https://user-images.githubusercontent.com/55240758/139538159-cb9f9804-65cb-48b3-886e-8c8af8a0df05.jpg)
+- **Langkah pertama** : Buka file  dengan ``` nano /etc/apache2/sites-available/franky.a06.com.conf``` pada Skypie dan ganti Alias di file tersebut menjadi ```/home```. Sesuai gambar berikut :
+   
+    ![8 - konf franky skypie](https://user-images.githubusercontent.com/55240758/139538159-cb9f9804-65cb-48b3-886e-8c8af8a0df05.jpg)
+    
 
-lalu Buka lynx franky.a06.com/index.php/home dan lynx franky.a06.com/homedan dan keduanya akan menghasilkan sebagai berikut.
-![8 - lynx franky home](https://user-images.githubusercontent.com/55240758/139538174-7cb8855c-ef5c-4bdc-bf33-b5e3d3b4a966.jpg)
+- **Langkah kedua** : Kemudian menambahkan file .htaccess pada /var/www dengan isi:
+
+    ```
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([^\.]+)$ $1.html [NC,L]
+    ```
+   
+- **Langkah ketiga** : Lakukan pengecekan dengan command ```lynx franky.a06.com/index.php/home``` dan ```lynx franky.a06.com/home``` pada node logue town atau alabasta. Kedua command tersebut akan menghasilkan sebagai berikut.
+   
+    ![8 - lynx franky home](https://user-images.githubusercontent.com/55240758/139538174-7cb8855c-ef5c-4bdc-bf33-b5e3d3b4a966.jpg)
 
 
 ### Soal 10
 **Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com**
 ### Jawaban 10
-Pertama Buka file /etc/apache2/sites-available/super.franky.a06.com.conf pada Skypie dan ubah DocumentRoot menjadi /var/www/super.franky.yyy.com
-![9 -  konf super skypie](https://user-images.githubusercontent.com/55240758/139538229-ba0dbbf7-e836-4476-b8ab-a013ed12efcb.jpg)
+- **Langkah pertama** : Menambahkan file ```super.franky.a06.com.conf ``` pada /etc/apache2/sites-available/ dengan mengcopy isi dari file franky.a06.com.conf sesuaikan dengan berikut :
+    ```
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/super.frangky.a06.com
+    ServerName super.frangky.a06.com
+    ServerAlias www.super.frangky.a06.com
+    ```
+    
+    ![9 -  konf super skypie](https://user-images.githubusercontent.com/55240758/139538229-ba0dbbf7-e836-4476-b8ab-a013ed12efcb.jpg)
+    
+- **Langkah kedua** :  lakukan pengecekan dengan command ```lynx super.franky.a06.com``` pada loguetown atau alabasta dan tampilan yang akan dibuka yaitu asset sebagai berikut :
 
-lalu Buka lynx super.franky.a06.com dan dia akan bisa buka aset.
-![9 - lynx super](https://user-images.githubusercontent.com/55240758/139538224-9b4ae877-2414-402e-af6d-c5126da1a76f.jpg)
+    ![9 - lynx super](https://user-images.githubusercontent.com/55240758/139538224-9b4ae877-2414-402e-af6d-c5126da1a76f.jpg)
 
 ### Soal 11
 **Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja**
 ### Jawaban 11
+
 Buka file /etc/apache2/sites-available/super.franky.a06.com.conf pada Skypie dan tambahkan pada /public "Options +Indexes"
 ![10 - konf](https://user-images.githubusercontent.com/55240758/139538231-ab38afab-50fc-4a31-ab99-9516ecb871ca.jpg)
 
