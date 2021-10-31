@@ -179,7 +179,7 @@ ServerName frangky.a06.com, ServerAlias www.frangky.B05.com. seperti gambar beri
     
 - **Langkah kedua** : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/super.franky.zip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip super.franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **super.franky** menjadi **super.franky.a06.com**.
     
-- **Langkah ketiga** :  lakukan pengecekan dengan command ```lynx super.franky.a06.com``` pada loguetown atau alabasta dan tampilan yang akan dibuka yaitu asset sebagai berikut :
+- **Langkah ketiga** :  lakukan pengecekan dengan command ```lynx super.franky.a06.com``` pada loguetown atau alabasta dan tampilan yang akan dibuka yaitu asset sebagai berikut.
 
     ![9 - lynx super](https://user-images.githubusercontent.com/55240758/139538224-9b4ae877-2414-402e-af6d-c5126da1a76f.jpg)
 
@@ -320,6 +320,7 @@ ServerName frangky.a06.com, ServerAlias www.frangky.B05.com. seperti gambar beri
     ![16 - super frankky](https://user-images.githubusercontent.com/55240758/139538462-902f3ceb-9225-437c-9801-f27feec32a8c.jpg)
 
 - **Langkah ketiga** : lakukan pengecekan dengan command ```lynx super.frangky.B05.com``` pada node loguetown atau alabasta, Ketika mendownload file eyeoffranky.jpg maka, web akan mendirect ke file franky.png, karena pada file tersebut terdapat substring franky.
+
     ![16 - mengandung franky](https://user-images.githubusercontent.com/55240758/139538472-31e0f7fc-3334-452f-be54-ead235582806.jpg)
 
     ![16 - franky png](https://user-images.githubusercontent.com/55240758/139538477-a066fb49-9add-4043-bf01-06f47af52ac3.jpg)
