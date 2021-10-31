@@ -132,7 +132,7 @@ ServerName frangky.a06.com, ServerAlias www.frangky.B05.com. seperti gambar beri
   
     ![8 - konf franky skypie](https://user-images.githubusercontent.com/55240758/139562772-69e3fc00-6fec-4636-97df-bd66c78df80f.jpg)
    
-- **Langkah kedua**  : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/franky.czip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **franky** menjadi **franky.a06.com**.
+- **Langkah kedua**  : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/franky.zip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **franky** menjadi **franky.a06.com**.
    
 - **Langkah ketiga** : Lakukan pengecekan dengan command  ```lynx 10.2.2.4``` dan ```lynx www.franky.a06.com``` pada node alabasta
   
@@ -177,7 +177,9 @@ ServerName frangky.a06.com, ServerAlias www.frangky.B05.com. seperti gambar beri
     
     ![9 -  konf super skypie](https://user-images.githubusercontent.com/55240758/139538229-ba0dbbf7-e836-4476-b8ab-a013ed12efcb.jpg)
     
-- **Langkah kedua** :  lakukan pengecekan dengan command ```lynx super.franky.a06.com``` pada loguetown atau alabasta dan tampilan yang akan dibuka yaitu asset sebagai berikut :
+- **Langkah kedua** : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/super.franky.zip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip super.franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **super.franky** menjadi **super.franky.a06.com**.
+    
+- **Langkah ketiga** :  lakukan pengecekan dengan command ```lynx super.franky.a06.com``` pada loguetown atau alabasta dan tampilan yang akan dibuka yaitu asset sebagai berikut :
 
     ![9 - lynx super](https://user-images.githubusercontent.com/55240758/139538224-9b4ae877-2414-402e-af6d-c5126da1a76f.jpg)
 
@@ -185,116 +187,142 @@ ServerName frangky.a06.com, ServerAlias www.frangky.B05.com. seperti gambar beri
 **Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja**
 ### Jawaban 11
 
-Buka file /etc/apache2/sites-available/super.franky.a06.com.conf pada Skypie dan tambahkan pada /public "Options +Indexes"
-![10 - konf](https://user-images.githubusercontent.com/55240758/139538231-ab38afab-50fc-4a31-ab99-9516ecb871ca.jpg)
+- **Langkah pertama** : Buka file ```/etc/apache2/sites-available/super.franky.a06.com.conf``` pada Skypie dan tambahkan pada /public "Options +Indexes"
+  
+    ![10 - konf](https://user-images.githubusercontent.com/55240758/139538231-ab38afab-50fc-4a31-ab99-9516ecb871ca.jpg)
 
-Buka lynx super.franky.a06.com/public, maka akan muncul directory listing.
-![10 - lynx](https://user-images.githubusercontent.com/55240758/139538232-10bf2d1e-8075-4dcb-bb5f-cebcf9372129.jpg)
+- **Langkah kedua** : lakukan pengecekan dengan command ```lynx super.franky.a06.com/public```, maka akan muncul directory listing.
+  
+    ![10 - lynx](https://user-images.githubusercontent.com/55240758/139538232-10bf2d1e-8075-4dcb-bb5f-cebcf9372129.jpg)
 
 ### Soal 12
 **Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /errors untuk mengganti error kode pada apache**
 ### Jawaban 12
-buka file /etc/apache2/sites-available/super.franky.a06.com.conf dan ubah ErrorDocument menjadi 404 /error/404.html
-![12 - konf](https://user-images.githubusercontent.com/55240758/139538236-f19c80f5-667a-4ef1-995f-96f7d313c068.jpg)
+- **Langkah pertama** : Buka file /etc/apache2/sites-available/super.franky.a06.com.conf dan ubah ErrorDocument menjadi 404 /error/404.html
 
-Buka lynx super.franky.a06.com/lathifa maka akan muncul sebagai berikut.
-![12 - lynx](https://user-images.githubusercontent.com/55240758/139538238-39c4913c-0ecb-4ea1-9f2d-fb02dc20e609.jpg)
+    ![11 - konf](https://user-images.githubusercontent.com/55240758/139563884-4a961ddb-25bb-443a-9d29-4e83666c7130.jpg)
+
+
+- **langkah kedua** : lakukan pengecekan dengan command ```lynx super.franky.a06.com/lathifa``` maka akan muncul halaman error sebagai berikut.
+
+    ![11 - lynx error](https://user-images.githubusercontent.com/55240758/139563904-82e60748-299e-41a8-b74b-862bc608f1f7.jpg)       
+
 
 ### Soal 13
 **Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js**
 ### Jawaban 13
-Pertama kita mengubah isi dari file /etc/apache2/sites-available/super.franky.a06.com.conf seperti pada gambar di bawah ini. Kita menambahkan konfigurasi :
+- **Langkah pertama** : mengubah isi dari file ```/etc/apache2/sites-available/super.franky.a06.com.conf``` dengan menambahkan ```Alias "/js" "/var/www/super.franky.a06.com/public/js"``` seperti pada gambar di bawah ini. 
 
-Alias "/js" "/var/www/super.franky.a06.com/public/js"
+    ![12 - konf](https://user-images.githubusercontent.com/55240758/139538236-f19c80f5-667a-4ef1-995f-96f7d313c068.jpg)
 
-![13 - konf](https://user-images.githubusercontent.com/55240758/139538260-d734e0db-a3af-4989-a4e8-ca12a00717b6.jpg)
-![13 - konf 15500](https://user-images.githubusercontent.com/55240758/139538246-6d800c28-5b56-4056-8cbe-8cdb2ef8da07.jpg)
-![13 - konf  ports](https://user-images.githubusercontent.com/55240758/139538242-85108fb5-a2e3-4f51-9cb5-29268f38c081.jpg)
+- **Langkah kedua** : Lakukan pengecekan dengan command ```lynx super.franky.yyy.com/public/js```  pada client loguetown atau alabasta. Maka akan menghasilkan tampilan sebagai berikut dengan alias yang telah berjalan dengan benar.
 
-![13 - lynx 15000](https://user-images.githubusercontent.com/55240758/139538291-00a07a3b-cce6-4926-9a16-ff607a5161ac.jpg)
-
-Lalu kita melakukan testing pada client Loguetown dan menghasilkan sebagai berikut dimana Dari gambar di atas, Alias telah berjalan dengan benar.
-![13 - lynx 15500](https://user-images.githubusercontent.com/55240758/139538302-57aa9be2-29b3-4ded-9d5e-d2a43aa739c9.jpg)
+    ![12 - lynx](https://user-images.githubusercontent.com/55240758/139538238-39c4913c-0ecb-4ea1-9f2d-fb02dc20e609.jpg)
 
 ### Soal 14
  Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
 ### Jawaban 14
-isi disini
+- **Langkah pertama** : Menambahkan file ```general.super.franky.a06.com-15000.conf ``` pada /etc/apache2/sites-available/ dengan mengcopy isi dari file franky.a06.com.conf sesuaikan dengan berikut :
 
+    ![13 - konf](https://user-images.githubusercontent.com/55240758/139538260-d734e0db-a3af-4989-a4e8-ca12a00717b6.jpg)
+    
+    Kemudian buat file ```general.super.franky.a06.com-15500.conf ``` dengan mngcopy file ```general.super.franky.a06.com-15000.conf``` melalui command ```cp general.super.franky.a06.com-15000.conf general.super.franky.a06.com-15500.conf ```. Lalu ubah portnya menjadi 15500 sebagai berikut :
+    
+    ![13 - konf 15500](https://user-images.githubusercontent.com/55240758/139538246-6d800c28-5b56-4056-8cbe-8cdb2ef8da07.jpg)
+    
+- **Langkah kedua** : pada /var/www lakukan pendownloadan file yang telah disediakan pada soal shift dengan command  ```wget https://github.com/FeinardSlim/Praktikum-Modul-2-Jarkom/general.mecha.franky.zip ```. File yang telah didownload merupakan file zip, lakukan unzip dengan command ```unzip general.mecha.franky.zip```. Setelah itu rename nama folder yang telah di unzip atau **general.mecha.franky** menjadi **general.mecha.a06.com**.
+
+- **Langkah ketiga** : Lakukan penambahan pada file /etc/apache2/ports.conf dengan Listen 15000 & 15500 sebagai berikut :
+
+    ![13 - konf  ports](https://user-images.githubusercontent.com/55240758/139538242-85108fb5-a2e3-4f51-9cb5-29268f38c081.jpg)
+
+- **Langkah keempat** : Lakukan pengecekan dengan command ```lynx general.super.franky.a06.com:15000 ``` & ```lynx general.super.franky.a06.com:15500 ```pada node loguetown atau alabasta. Maka tampilan yang diberikan sebagai berikut :
+    
+    Pada port 15000
+    
+    ![13 - lynx 15000](https://user-images.githubusercontent.com/55240758/139538291-00a07a3b-cce6-4926-9a16-ff607a5161ac.jpg)
+    
+    Pada port 15500
+    
+    ![13 - konf 15500](https://user-images.githubusercontent.com/55240758/139564555-9e36ba86-cacb-4e56-82f3-a0152e0567a2.jpg)
+
+    
+ 
 ### Soal 15
  **Dengan authentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy**
 ### Jawaban 15
-di dalam file /etc/apache2/sites-available/general.mecha.franky.a06.com-15000.conf, dimasukkan config Authentication
+ - **Langkah pertama** :  Membuat sebuah autentikasi username dan password pada server menggunakan : ```htpasswd -c /etc/apache2/.htpasswd luffy ```
+ - **Langkah kedua** : Melakukan penambahan pada file ```/etc/apache2/sites-available/general.mecha.franky.a06.com-15000.conf```, dengan config Authentication sebagai berikut :
+    ```
+    <Directory /var/www/general.mecha.franky.a06.com>
+        AuthType Basic
+        AuthName "Restricted Content"
+        AuthUserFile /etc/apache2/.htpasswd
+        Require valid-user
+    </Directory>
+    ```
+    ![14 - konf 15000](https://user-images.githubusercontent.com/55240758/139538307-b4cb69af-3934-4da7-8356-854012c6d82a.jpg)
 
-<Directory /var/www/general.mecha.franky.a06.com>
-    AuthType Basic
-    AuthName "Restricted Content"
-    AuthUserFile /etc/apache2/.htpasswd
-    Require valid-user
-</Directory>
-![14 - konf 15000](https://user-images.githubusercontent.com/55240758/139538307-b4cb69af-3934-4da7-8356-854012c6d82a.jpg)
+    Lalu di dalam file /etc/apache2/sites-available/general.mecha.franky.a06.com-15500.conf, juga ditambahkan config Authentication
+    
+    ![14 - konf 15500](https://user-images.githubusercontent.com/55240758/139538331-eaf10aaa-f1b0-40d5-96ad-31ebe8439bec.jpg)
 
-Lalu di dalam file /etc/apache2/sites-available/general.mecha.franky.a06.com-15500.conf, juga dimasukkan config Authentication
+- **Langkah ketiga** : lakukan pengecekan dengan command ```lynx general.mecha.franky.a06.com:15000``` & ```lynx general.mecha.franky.a06.com:15500``` pada alabasta atau loguetown. Maka sebelum masuk halaman diminta untuk memasukkan user yang telah terdaftar pada /etc/apache2/.htpasswd yaitu luffy dan password onepiece. 
 
-<Directory /var/www/general.mecha.franky.a06.com>
-    AuthType Basic
-    AuthName "Restricted Content"
-    AuthUserFile /etc/apache2/.htpasswd
-    Require valid-user
-</Directory>
-![14 - konf 15500](https://user-images.githubusercontent.com/55240758/139538331-eaf10aaa-f1b0-40d5-96ad-31ebe8439bec.jpg)
+    ![14 - username](https://user-images.githubusercontent.com/55240758/139538341-f748019d-e43f-4ce9-87d8-fb1f022f0940.jpg)
+    ![14 - pass](https://user-images.githubusercontent.com/55240758/139538342-c8a30585-696e-4962-a76b-25c1bb6e8559.jpg)
+    
+    apabila telah sesuai akan diarahkan ke tampilan halaman sebagai berikut :
+    
+    pada port 15000
+    
+    ![13 - lynx 15000](https://user-images.githubusercontent.com/55240758/139538291-00a07a3b-cce6-4926-9a16-ff607a5161ac.jpg)
+    
+    pada port 15500
+    
+    ![13 - konf 15500](https://user-images.githubusercontent.com/55240758/139564555-9e36ba86-cacb-4e56-82f3-a0152e0567a2.jpg)
 
-lakukan testing dari client dengan memasukkan port 15000 dan disini Kita diminta untuk memasukkan user yang telah terdaftar pada /etc/apache2/.htpasswd yaitu luffy dan password onepiece
-![14 - username](https://user-images.githubusercontent.com/55240758/139538341-f748019d-e43f-4ce9-87d8-fb1f022f0940.jpg)
-![14 - pass](https://user-images.githubusercontent.com/55240758/139538342-c8a30585-696e-4962-a76b-25c1bb6e8559.jpg)
-
-Lalu dilakukan testing dari client dengan memasukkan port 15500
-
-Kita diminta untuk memasukkan user yang telah terdaftar pada /etc/apache2/.htpasswd yaitu luffy dan password onepiece
-![14 - user 15500](https://user-images.githubusercontent.com/55240758/139538351-4ba9dc61-6d7d-45ec-8042-203cf5ae2e74.jpg)
-![14 - pass 15500](https://user-images.githubusercontent.com/55240758/139538387-5eeade35-aba6-4d01-9f11-696d47ebbca4.jpg)
+    
 
 ### Soal 16
 **Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.yyy.com**
 ### Jawaban 16
-Enieslobby -> /etc/bind/kaizoku/franku.a06.com
-![15 - konf enies](https://user-images.githubusercontent.com/55240758/139538397-a2b5629c-f2d9-4fff-8b2b-0acccc01aeb6.jpg)
+- **Langkah pertama** : pada file ```/etc/bind/kaizoku/franky.a06.com``` di enieslobby lakukan perubahan untuk domain www.franky.a06.com yang semula IP eniesLobby (10.2.2.2) menjadi IP Skypie (10.2.2.4). Sebagai berikut :
 
-Melakukan testing pada client Loguetown
-![15 - lynx](https://user-images.githubusercontent.com/55240758/139538440-c29a7606-6256-4423-9bf2-981a85d8c5f2.jpg)
+    ![15 - konf enies](https://user-images.githubusercontent.com/55240758/139538397-a2b5629c-f2d9-4fff-8b2b-0acccc01aeb6.jpg)
 
-Didapatkan hasil sebagai berikut
-![15 - hasil](https://user-images.githubusercontent.com/55240758/139538428-40b006dc-5cda-4da9-8321-8e7e3a3e9006.jpg)
+- **Langkah kedua** : Melakukan testing pada client Loguetown atau alabasta dengan command ```lynx 10.2.2.4```
+    ![image](https://user-images.githubusercontent.com/55240758/139564945-17bd89aa-b2be-4137-9379-dd4dc4e2a0a0.png)
+
+    Didapatkan hasil sebagai berikut
+    ![image](https://user-images.githubusercontent.com/55240758/139564959-1cd8c307-5709-46d9-8e7b-a7222f8b0cff.png)
 
 ### Soal 17
 **Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png. Maka bantulah Luffy untuk membuat konfigurasi dns dan web server ini!**
 ### Jawaban 17
-pertama  membuat file .htaccess pada /var/www/super.franky.a06.com/public/images dengan memasukkan syntax sebagai berikut
-```
-RewriteEngine On
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !\bfranky.png\b
-RewriteRule franky http://www.super.franky.a06.com/public/images/franky.png$1 [L,R=301] 
-```
-dimana dilakukan redirect secara custom
 
-RewriteCond %{REQUEST_FILENAME} !\bfranky.png\b digunakan untuk memfilter setiap file yang tidak bernama franky.png
+- **Langkah pertama** : membuat file .htaccess pada ```/var/www/super.franky.a06.com/public/images``` dengan memasukkan syntax sebagai berikut.
+    ```
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} !\bfranky.png\b
+    RewriteRule franky http://www.super.franky.a06.com/public/images/franky.png$1 [L,R=301] 
+    ```
+    dimana dilakukan redirect secara custom
 
-Lalu di-rewrite lagi dengan menggunakan RewriteRule franky http://www.super.franky.a06.com/public/images/franky.png$1 [L,R=301] yang mendeteksi jika terdapat file yang memiliki substring franky akan diredirect ke file http://www.super.franky.a06.com/public/images/franky.png
+    RewriteCond %{REQUEST_FILENAME} !\bfranky.png\b digunakan untuk memfilter setiap file yang tidak bernama franky.png
 
-![16 - htaccesss](https://user-images.githubusercontent.com/55240758/139538456-1e35bf2a-530d-4737-be35-0d28e495aaf7.jpg)
+    Lalu lakukan rewrite kembali dengan menggunakan RewriteRule franky http://www.super.franky.a06.com/public/images/franky.png$1 [L,R=301] yang mendeteksi jika terdapat file yang memiliki substring franky akan diredirect ke file http://www.super.franky.a06.com/public/images/franky.png  . sebagai berikut :
 
-Lalu tambahkan
+    ![16 - htaccesss](https://user-images.githubusercontent.com/55240758/139538456-1e35bf2a-530d-4737-be35-0d28e495aaf7.jpg)
 
-AllowOverride All
-pada file /etc/apache2/sites-available/super.franky.a06.com.conf
-![16 - super frankky](https://user-images.githubusercontent.com/55240758/139538462-902f3ceb-9225-437c-9801-f27feec32a8c.jpg)
+- **Langkah kedua** : lakukan penambahan ```AllowOverride``` All pada file ```/etc/apache2/sites-available/super.franky.a06.com.conf``` sebagai berikut
+    ![16 - super frankky](https://user-images.githubusercontent.com/55240758/139538462-902f3ceb-9225-437c-9801-f27feec32a8c.jpg)
 
-Ketika mendownload file frankysupersecretfood.cursed maka, web akan mendirect ke file franky.png, karena pada file frankysupersecretfood.cursed terdapat substring franky.
-![16 - mengandung franky](https://user-images.githubusercontent.com/55240758/139538472-31e0f7fc-3334-452f-be54-ead235582806.jpg)
+- **Langkah ketiga** : lakukan pengecekan dengan command ```lynx super.frangky.B05.com``` pada node loguetown atau alabasta, Ketika mendownload file eyeoffranky.jpg maka, web akan mendirect ke file franky.png, karena pada file tersebut terdapat substring franky.
+    ![16 - mengandung franky](https://user-images.githubusercontent.com/55240758/139538472-31e0f7fc-3334-452f-be54-ead235582806.jpg)
 
-
-![16 - franky png](https://user-images.githubusercontent.com/55240758/139538477-a066fb49-9add-4043-bf01-06f47af52ac3.jpg)
+    ![16 - franky png](https://user-images.githubusercontent.com/55240758/139538477-a066fb49-9add-4043-bf01-06f47af52ac3.jpg)
 
 
 
